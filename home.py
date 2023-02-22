@@ -21,6 +21,10 @@ print(watermark(iversions=True, globals_=globals()))
 
 
 #------------------------------------------------------------------#
+
+# Set page configurations - ALWAYS at the top
+st.set_page_config(page_title="Crypto Predictor",page_icon="📈",layout="centered",initial_sidebar_state="auto")
+
 @st.cache_data # Add cache data decorator
 
 # Load and Use local style.css file
