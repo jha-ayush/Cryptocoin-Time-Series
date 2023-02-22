@@ -104,7 +104,7 @@ figure.update_layout(title = f"Candlestick Analysis for {ticker} price",
 
 
 # Display Candlestick chart
-candlestick_check_box=st.checkbox(label=f"Display {ticker} Candlestick chart")
+candlestick_check_box=st.checkbox(label=f"Display {ticker} interactive Candlestick chart")
 if candlestick_check_box:
     # Bollinger bands - trendlines plotted between two standard deviations
     st.info(f"Candlestick chart shows {ticker} crypto coin's Open, High, Low, and Close price for the day")
