@@ -43,8 +43,8 @@ except:
     logging.error('Cannot find the CSV file')
 
 # Title/ header
-st.header("Next day crypto price predictor app")
-st.write("Select from the Top 10 market cap crypto coins to view next day's potential closing price forecast")
+st.header("Crypto coin next day price predictor")
+st.write("Select from the Top 10 market cap crypto coins to view forecast for tomorrow's potential closing price")
 st.write("---")
     
 # Show tickers list
