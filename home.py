@@ -81,7 +81,7 @@ if data_check_box:
     st.write(data)
 
     # shape of the data
-    st.write(f"Data shape (rows, columns) - ",data.shape)
+    # st.write(f"Data shape (rows, columns) - ",data.shape)
 
 
 
@@ -99,8 +99,7 @@ figure.update_layout(title = f"Candlestick Analysis for {ticker} price",
 candlestick_check_box=st.checkbox(label=f"Display {ticker} Candlestick chart")
 if candlestick_check_box:
     # Bollinger bands - trendlines plotted between two standard deviations
-    st.header(f"{ticker} Candlestick chart")
-    st.info("Candlestick shows the market's open, high, low, and close price for the day")
+    st.info(f"Candlestick chart shows {ticker} crypto coin's Open, High, Low, and Close price for the day")
     st.plotly_chart(figure)
 
     
@@ -109,7 +108,7 @@ if candlestick_check_box:
 prediction_check_box=st.checkbox(label=f"Display data for prediction")
 if prediction_check_box:
     # Bollinger bands - trendlines plotted between two standard deviations
-    st.header(f"{ticker} prediction data on 'Close' price")
+    st.write(f"<b>{ticker} prediction data on 'Close' price</b>",unsafe_allow_html=True)
     
     correlation=data.corr()
     # st.write(correlation["Close"].sort_values(ascending=False))
