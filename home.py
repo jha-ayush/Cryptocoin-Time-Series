@@ -54,6 +54,7 @@ st.write("---")
 # Show tickers list
 st.write(f"<b>Below is the list of the coins available for analysis</b>",unsafe_allow_html=True)
 st.write(tickers)
+st.write("---")
 
 #------------------------------------------------------------------#
 
@@ -109,10 +110,12 @@ if candlestick_check_box:
     st.info(f"Candlestick chart shows {ticker} crypto coin's Open, High, Low, and Close price for the day")
     st.plotly_chart(figure)
 
-    
+
+st.write("---")
+
     
 # Display data for prediction "Close"
-prediction_check_box=st.checkbox(label=f"Display data for prediction")
+prediction_check_box=st.checkbox(label=f"Display data for {ticker} price prediction")
 if prediction_check_box:
     # Bollinger bands - trendlines plotted between two standard deviations
     st.write(f"<b>{ticker} prediction data on 'Close' price</b>",unsafe_allow_html=True)
