@@ -16,3 +16,4 @@ yfinance : 0.2.3
 ```
 
 
+<sub>**Note:** This is a project app using an opensource data provider `yfinance` and is not intended to be used live and to make live predictions</sub>
