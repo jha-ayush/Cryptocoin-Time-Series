@@ -1,5 +1,9 @@
-# Cryptocoin-Time-Series
+# Cryptocoin time series analysis
+
 Simple data app for cryptocoin time series prediction using multiple models (Linear Regression, Polynomial Regression, Random Forest Regressor) for next day's price prediction comparisons.
+
+
+
 
 ## Libraries
 ```@python
