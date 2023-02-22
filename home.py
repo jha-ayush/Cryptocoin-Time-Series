@@ -4,11 +4,9 @@ import yfinance as yf
 import datetime
 from datetime import date, timedelta
 import streamlit as st # deployment
-import cufflinks as cf # import cufflinks for bollinger bands
 import plotly.graph_objects as go # Candlestick chart
 from sklearn.linear_model import LinearRegression # Time series analysis
 from sklearn.preprocessing import PolynomialFeatures # Polynomial Regression
-from prophet.plot import plot_plotly
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
@@ -44,8 +42,13 @@ try:
 except:
     logging.error('Cannot find the CSV file')
 
+# Title/ header
+st.header("Next day crypto price predictor app")
+st.write("Select from the Top 10 market cap crypto coins to view next day's potential closing price forecast")
+st.write("---")
+    
 # Show tickers list
-st.write(f"Below is the list of the coins available for analysis")
+st.write(f"<b>Below is the list of the coins available for analysis</b>",unsafe_allow_html=True)
 st.write(tickers)
 
 #------------------------------------------------------------------#
@@ -182,8 +185,6 @@ if prediction_check_box:
     if st.button("Polynomial Regression prediction"):
         st.write(f"Predicted {ticker} close price for the next day is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
         
-        
-    
     
     # Define the features and target
     features = ['Open', 'High', 'Low', 'Adj Close', 'Volume', 'Pct_Change']
@@ -209,15 +210,3 @@ if prediction_check_box:
     if st.button("Random Forest prediction"):
         # Display the predicted close price
         st.write(f"Predicted {ticker} close price for the next day is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
-
-        
-        
-        
-        
-        
-        
-    
-    
-    
-    
-
