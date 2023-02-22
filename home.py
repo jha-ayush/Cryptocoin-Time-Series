@@ -127,7 +127,7 @@ if prediction_check_box:
     lm = LinearRegression()
     lm.fit(x, y)
 
-    # Predict the next day close price
+    # Predict tomorrow close price
     last_row = data.tail(1)
     next_day_data = pd.DataFrame({'Open': last_row['Open'],
                                   'High': last_row['High'],
@@ -140,7 +140,7 @@ if prediction_check_box:
 
     # Display the predicted close price - Linear Regression
     if st.button("Linear Regression prediction"):
-        st.write(f"Predicted {ticker} close price for the next day is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
+        st.write(f"Predicted {ticker} close price for tomorrow is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
         
         
         
@@ -169,7 +169,7 @@ if prediction_check_box:
     lm_poly = LinearRegression()
     lm_poly.fit(X_train, y_train)
 
-    # Predict the next day close price
+    # Predict tomorrow close price
     last_row = data.tail(1)
     next_day_data = pd.DataFrame({'Open': last_row['Open'],
                                   'High': last_row['High'],
@@ -183,7 +183,7 @@ if prediction_check_box:
 
     # Define a button to display the predicted price
     if st.button("Polynomial Regression prediction"):
-        st.write(f"Predicted {ticker} close price for the next day is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
+        st.write(f"Predicted {ticker} close price for tomorrow is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
         
     
     # Define the features and target
@@ -197,16 +197,16 @@ if prediction_check_box:
     rf = RandomForestRegressor(n_estimators=100, random_state=42)
     rf.fit(X_train, y_train.values.ravel())
 
-    # Define a function to predict the next day's close price
+    # Define a function to predict tomorrow's close price
     def predict_next_close_price():
         # Get the last row of data
         last_row = data.tail(1)[features]
 
-        # Predict the next day's close price
+        # Predict tomorrow's close price
         predicted_close_price = rf.predict(last_row)[0]
 
 
     # Create a button to trigger the prediction
     if st.button("Random Forest prediction"):
         # Display the predicted close price
-        st.write(f"Predicted {ticker} close price for the next day is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
+        st.write(f"Predicted {ticker} close price for tomorrow is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
