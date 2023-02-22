@@ -6,7 +6,14 @@ from datetime import date, timedelta
 import streamlit as st # deployment
 import cufflinks as cf # import cufflinks for bollinger bands
 import plotly.graph_objects as go # Candlestick chart
-from autots import AutoTS # Time series analysis
+from sklearn.linear_model import LinearRegression # Time series analysis
+from sklearn.preprocessing import PolynomialFeatures # Polynomial Regression
+from prophet.plot import plot_plotly
+
+from sklearn.ensemble import RandomForestRegressor
+
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
 
 # Import warnings + watermark
 from watermark import watermark
@@ -17,6 +24,7 @@ print(watermark(iversions=True, globals_=globals()))
 
 
 #------------------------------------------------------------------#
+@st.cache_data # Add cache data decorator
 
 # Load and Use local style.css file
 def local_css(file_name):
@@ -40,6 +48,7 @@ except:
 # Show tickers list
 st.write(f"Below is the list of the coins available for analysis")
 st.write(tickers)
+
 #------------------------------------------------------------------#
 
 # declare variable for current date/ end date
@@ -114,18 +123,80 @@ if bollinger_charts_check_box:
 prediction_check_box=st.checkbox(label=f"Display data for prediction")
 if prediction_check_box:
     # Bollinger bands - trendlines plotted between two standard deviations
-    st.header(f"{ticker} prediction data")
+    st.header(f"{ticker} prediction data on 'Close' price")
     
     correlation=data.corr()
-    st.write(correlation["Close"].sort_values(ascending=False))
+    # st.write(correlation["Close"].sort_values(ascending=False))
     
-    # Using AutoTS Time Series analysis, predict price for the next 30 days
-    # model = AutoTS(forecast_length=10, frequency='infer', ensemble='simple')
-    # model = model.fit(data, date_col='Date', value_col='Close', id_col=None)
-    # prediction = model.predict()
-    # forecast = prediction.forecast
-    # st.button(st.write(forecast))
-    
-             
+    # Create new feature - percent change
+    data['Pct_Change'] = data['Close'].pct_change()
+    data = data.dropna()
 
+    # Linear Regression
+    x = data[['Open', 'High', 'Low', 'Adj Close', 'Volume', 'Pct_Change']]
+    y = data[['Close']]
+
+    lm = LinearRegression()
+    lm.fit(x, y)
+
+    # Predict the next day close price
+    last_row = data.tail(1)
+    next_day_data = pd.DataFrame({'Open': last_row['Open'],
+                                  'High': last_row['High'],
+                                  'Low': last_row['Low'],
+                                  'Adj Close': last_row['Adj Close'],
+                                  'Volume': last_row['Volume'],
+                                  'Pct_Change': last_row['Pct_Change']})
+
+    predicted_close_price = lm.predict(next_day_data)[0][0]
+
+    # Display the predicted close price - Linear Regression
+    if st.button("Linear Regression prediction"):
+        st.write(f"Predicted {ticker} close price for the next day is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
+        
+        
+        
+        
+    
+    # Display the predicted close price - Polynomial Regression
+    
+    # Select the 'Close' column as the target variable
+    y = data['Close']
+
+    # Select the remaining columns as the features
+    X = data.drop(['Close', 'Date'], axis=1)
+
+    # Create polynomial features with degree 2
+    poly = PolynomialFeatures(degree=2)
+    X_poly = poly.fit_transform(X)
+
+    # Split data into training and testing sets
+    split = int(0.8*len(data))
+    X_train = X_poly[:split]
+    y_train = y[:split]
+    X_test = X_poly[split:]
+    y_test = y[split:]
+
+    # Train a polynomial regression model
+    lm_poly = LinearRegression()
+    lm_poly.fit(X_train, y_train)
+
+    # Predict the next day close price
+    last_row = data.tail(1)
+    next_day_data = pd.DataFrame({'Open': last_row['Open'],
+                                  'High': last_row['High'],
+                                  'Low': last_row['Low'],
+                                  'Adj Close': last_row['Adj Close'],
+                                  'Volume': last_row['Volume'],
+                                  'Pct_Change': last_row['Pct_Change']})
+    next_day_data_poly = poly.transform(next_day_data)
+
+    predicted_close_price = lm_poly.predict(next_day_data_poly)[0]
+
+    # Define a button to display the predicted price
+    if st.button("Polynomial Regression prediction"):
+        st.write(f"Predicted {ticker} close price for the next day is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
+    
+    
+    
 
