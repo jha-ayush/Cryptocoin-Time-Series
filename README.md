@@ -23,6 +23,8 @@ To run the Crypto Pricing Predictor, you will need to have Python 3 installed on
 
 `pip install pandas streamlit plotly yfinance scikit-learn`
 
+OR
+
 `pip install -r requirements.txt`
 
 
