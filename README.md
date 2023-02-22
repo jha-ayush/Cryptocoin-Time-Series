@@ -26,10 +26,6 @@ To run the Crypto Pricing Predictor, you will need to have Python 3 installed on
 Create new environment:
 - `conda create -n [new_name] python=3.9`
 - `conda activate [new_name]`
-- `pip install pandas streamlit plotly yfinance scikit-learn`
-
-**OR**
-
 - `pip install -r requirements.txt`
 - `git clone` the repo to your local drive
 - `cd` into the folder in Terminal
