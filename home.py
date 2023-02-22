@@ -48,7 +48,7 @@ except:
 
 # Title/ header
 st.header("Crypto coin next day price predictor")
-st.write("Select from the Top 10 market cap crypto coins to view forecast for tomorrow's potential closing price")
+st.write("Select from the Top 10 crypto coins based on market cap to view forecast for tomorrow's potential closing price and compare against different Machine Learning models")
 st.write("---")
     
 # Show tickers list
