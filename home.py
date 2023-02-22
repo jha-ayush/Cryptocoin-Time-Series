@@ -194,7 +194,7 @@ if prediction_check_box:
     X_train, X_test, y_train, y_test = train_test_split(data[features], data[target], test_size=0.3, random_state=42)
 
     # Train a random forest regression model
-    rf = RandomForestRegressor(n_estimators=100, random_state=42)
+    rf = RandomForestRegressor(n_estimators=200, random_state=1)
     rf.fit(X_train, y_train.values.ravel())
 
     # Define a function to predict tomorrow's close price
