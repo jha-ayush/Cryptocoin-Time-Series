@@ -19,7 +19,7 @@ yfinance : 0.2.3
 
 ## Implementation
 
-To run the Crypto Pricing Predictor, you will need to have Python 3 installed on your machine, along with the required dependencies listed in the requirements.txt file. You can install the dependencies by running the following command:
+To run the Crypto Pricing Predictor, you will need to have Python 3 installed on your machine, along with the required dependencies listed in the `requirements.txt` file. You can install the dependencies by running the following command:
 
 `pip install pandas streamlit plotly yfinance scikit-learn`
 
