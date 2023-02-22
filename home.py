@@ -11,9 +11,8 @@ from sklearn.preprocessing import PolynomialFeatures # Polynomial Regression
 from prophet.plot import plot_plotly
 
 from sklearn.ensemble import RandomForestRegressor
-
+from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
 
 # Import warnings + watermark
 from watermark import watermark
@@ -104,19 +103,6 @@ if candlestick_check_box:
     st.info("Candlestick shows the market's open, high, low, and close price for the day")
     st.plotly_chart(figure)
 
-# Display Bollinger charts
-bollinger_charts_check_box=st.checkbox(label=f"Display {ticker} charts")
-if bollinger_charts_check_box:
-    # Bollinger bands - trendlines plotted between two standard deviations
-    st.header(f"{ticker} Bollinger bands")
-    st.info("Bollinger Bands are a technical analysis tool that measures volatility of a financial instrument by plotting three lines: a simple moving average and two standard deviation lines (upper and lower bands). They are used to identify possible overbought or oversold conditions in the market, trend changes and potential buy and sell signals. The upper band is plotted as the moving average plus two standard deviations and lower band is plotted as moving average minus two standard deviations. They should be used in conjunction with other analysis methods for a complete market analysis and not as a standalone method.")
-    # Reset index back to original
-    data.reset_index(inplace=True)
-    # Add description for visualization
-    qf=cf.QuantFig(data,title=f'Bollinger Quant Figure for {ticker}',legend='top',name='GS')
-    qf.add_bollinger_bands()
-    fig = qf.iplot(asFigure=True)
-    st.plotly_chart(fig)
     
     
 # Display data for prediction "Close"
@@ -196,6 +182,42 @@ if prediction_check_box:
     # Define a button to display the predicted price
     if st.button("Polynomial Regression prediction"):
         st.write(f"Predicted {ticker} close price for the next day is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
+        
+        
+    
+    
+    # Define the features and target
+    features = ['Open', 'High', 'Low', 'Adj Close', 'Volume', 'Pct_Change']
+    target = ['Close']
+
+    # Split the data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(data[features], data[target], test_size=0.3, random_state=42)
+
+    # Train a random forest regression model
+    rf = RandomForestRegressor(n_estimators=100, random_state=42)
+    rf.fit(X_train, y_train.values.ravel())
+
+    # Define a function to predict the next day's close price
+    def predict_next_close_price():
+        # Get the last row of data
+        last_row = data.tail(1)[features]
+
+        # Predict the next day's close price
+        predicted_close_price = rf.predict(last_row)[0]
+
+
+    # Create a button to trigger the prediction
+    if st.button("Random Forest prediction"):
+        # Display the predicted close price
+        st.write(f"Predicted {ticker} close price for the next day is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
+
+        
+        
+        
+        
+        
+        
+    
     
     
     
