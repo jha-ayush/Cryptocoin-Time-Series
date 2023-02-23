@@ -146,7 +146,7 @@ if prediction_check_box:
     predicted_close_price = lm.predict(next_day_data)[0][0]
 
     # Display the predicted close price - Linear Regression
-    if st.button("Linear Regression prediction"):
+    if st.button("Linear Regression ML prediction"):
         st.write(f"Predicted {ticker} close price for tomorrow is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
         
         
@@ -189,7 +189,7 @@ if prediction_check_box:
     predicted_close_price = lm_poly.predict(next_day_data_poly)[0]
 
     # Define a button to display the predicted price
-    if st.button("Polynomial Regression prediction"):
+    if st.button("Polynomial Regression ML prediction"):
         st.write(f"Predicted {ticker} close price for tomorrow is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
         
     
@@ -214,6 +214,6 @@ if prediction_check_box:
 
 
     # Create a button to trigger the prediction
-    if st.button("Random Forest prediction"):
+    if st.button("Random Forest ML prediction"):
         # Display the predicted close price
         st.write(f"Predicted {ticker} close price for tomorrow is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
