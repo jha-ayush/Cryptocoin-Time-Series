@@ -146,7 +146,7 @@ if prediction_check_box:
     
     
     # Display today's Close price
-    st.write(f"View today's 'Close' price: <b>{predicted_close_price:.2f}</b>",unsafe_allow_html=True)
+    st.write(f"Today's Close price is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
     
     
     # Display the predicted close price - Linear Regression
