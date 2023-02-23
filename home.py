@@ -106,7 +106,6 @@ figure.update_layout(title = f"Candlestick Analysis for {ticker} price",
 # Display Candlestick chart
 candlestick_check_box=st.checkbox(label=f"Display {ticker} interactive Candlestick chart")
 if candlestick_check_box:
-    # Bollinger bands - trendlines plotted between two standard deviations
     st.info(f"Candlestick chart shows {ticker} crypto coin's Open, High, Low, and Close price for the day")
     st.plotly_chart(figure)
 
@@ -117,7 +116,6 @@ st.write("---")
 # Display data for prediction "Close"
 prediction_check_box=st.checkbox(label=f"Display data for {ticker} price prediction")
 if prediction_check_box:
-    # Bollinger bands - trendlines plotted between two standard deviations
     st.write(f"<b>{ticker} prediction data on 'Close' price</b>",unsafe_allow_html=True)
     
     correlation=data.corr()
