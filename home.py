@@ -143,6 +143,12 @@ if prediction_check_box:
 
     predicted_close_price = lm.predict(next_day_data)[0][0]
 
+    
+    
+    # Display today's Close price
+    st.write(f"View today's 'Close' price: <b>{predicted_close_price:.2f}</b>",unsafe_allow_html=True)
+    
+    
     # Display the predicted close price - Linear Regression
     if st.button("Linear Regression ML prediction"):
         st.write(f"Predicted {ticker} close price for tomorrow is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
