@@ -141,12 +141,8 @@ if prediction_check_box:
                                   'Volume': last_row['Volume'],
                                   'Pct_Change': last_row['Pct_Change']})
 
-    predicted_close_price = lm.predict(next_day_data)[0][0]
+    predicted_close_price = lm.predict(next_day_data)[0][0] 
 
-    
-    
-    # Display today's Close price
-    st.write(f"Today's Close price is: <b>{predicted_close_price:.2f} USD</b>",unsafe_allow_html=True)
     
     
     # Display the predicted close price - Linear Regression
