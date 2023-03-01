@@ -1,5 +1,11 @@
 # Crypto Next-day Price Predictor
 
+<img
+  src="./Resources/cryptocurrency.png"
+  alt="Cryptocurrency"
+  title=""
+  style="display: inline-block; margin: 0 auto; max-width: 100px">
+
 The Crypto Next-day Price Predictor app is a Streamlit-based web interface that lets users view crypto coins historical pricing data for the last 3 years and compare different machine learning models to predict **tomorrow's** future '**Closing**' price for the top 10 cryptocurrency coins by market cap. 
 
 The app is powered by Python and uses popular libraries such as `pandas`, `streamlit`, `yfinance` for historical data gathering, and `plotly` to handle data and provide rich visualizations.
