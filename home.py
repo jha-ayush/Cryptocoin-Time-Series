@@ -114,9 +114,8 @@ st.write("---")
 
     
 # Display data for prediction "Close"
-prediction_check_box=st.checkbox(label=f"Display data for {ticker} price prediction")
+prediction_check_box=st.checkbox(label=f"Display ML data for {ticker} next-day 'Close' price prediction")
 if prediction_check_box:
-    st.write(f"<b>{ticker} prediction data on 'Close' price</b>",unsafe_allow_html=True)
     
     correlation=data.corr()
     # st.write(correlation["Close"].sort_values(ascending=False))
